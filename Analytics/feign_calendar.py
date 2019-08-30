@@ -54,30 +54,23 @@ def get_events(num_events):
         # print(start, event['summary'])
 
 
-def build_date_time(date, time, gmt):
-    return f'{date}T{time}{gmt}'
+def build_date_time(date, time):
+    return f'{date}T{time}'
 
 
-def get_time_zone(gmt):
-    time_zones = {
-        "-04:00": 'America/New_York'
-    }
-    return time_zones.get(gmt)
-
-
-def set_events(date, start_time, end_time, gmt, description, location, title):
+def set_events(date, start_time, end_time, time_zone, description, location, title):
     service = login()
     event = {
         'summary': f'{title}',
         'location': f'{location}',
         'description': f'{description}',
         'start': {
-            'dateTime': build_date_time(date, start_time, gmt),
-            'timeZone': get_time_zone(gmt),
+            'dateTime': build_date_time(date, start_time),
+            'timeZone': f'{time_zone}',
         },
         'end': {
-            'dateTime': build_date_time(date, end_time, gmt),
-            'timeZone': get_time_zone(gmt),
+            'dateTime': build_date_time(date, end_time),
+            'timeZone': f'{time_zone}',
         },
         'recurrence': [
             # 'RRULE:FREQ=DAILY;COUNT=2'
@@ -100,7 +93,7 @@ def set_events(date, start_time, end_time, gmt, description, location, title):
 
 
 def main():
-    set_events("2019-09-01", "13:00:00", "14:00:00", "-04:00", "This is a test calendar event.", "New York City", "Sample Title")
+    set_events("2019-09-01", "13:00:00", "14:00:00", "America/New_York", "This is a test calendar event.", "New York City", "Sample Title")
 
 
 if __name__ == '__main__':
