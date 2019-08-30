@@ -44,6 +44,7 @@ def get_events(num_events):
     events_result = service.events().list(calendarId='primary', timeMin=now,
                                         maxResults=num_events, singleEvents=True,
                                         orderBy='startTime').execute()
+    print('Events obtained from Google, returning.')
     return events_result.get('items', [])
 
 
@@ -51,7 +52,7 @@ def build_date_time(date, time):
     return f'{date}T{time}'
 
 
-def set_events(date, start_time, end_time, time_zone, description, location, title):
+def set_events(date, start_time, end_time, time_zone, title, location, description):
     service = login()
     event = {
         'summary': f'{title}',
@@ -81,6 +82,7 @@ def set_events(date, start_time, end_time, time_zone, description, location, tit
         },
     }
 
+    print('Sending event to Google.')
     event = service.events().insert(calendarId='primary', body=event).execute()
     print('Event created: %s' % (event.get('htmlLink')))
 
