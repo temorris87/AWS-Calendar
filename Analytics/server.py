@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
-from Analytics import feign_calendar
+import feign_calendar
 app = Flask(__name__)
 
 
@@ -26,4 +26,4 @@ def create_event():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
