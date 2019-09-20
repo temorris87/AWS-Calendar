@@ -2,17 +2,17 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 import feign_calendar
-app = Flask(__name__)
+application = Flask(__name__)
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def get_events():
     num_events = request.args.get('num_events')
     events = feign_calendar.get_events(num_events)
     return jsonify(events)
 
 
-@app.route('/create', methods=['POST'])
+@application.route('/create', methods=['POST'])
 def create_event():
     date = request.args.get('date')
     start_time = request.args.get('start_time')
@@ -26,4 +26,4 @@ def create_event():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    application.run(host="0.0.0.0", port=5000)
