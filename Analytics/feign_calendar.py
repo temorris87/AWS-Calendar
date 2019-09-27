@@ -87,6 +87,16 @@ def set_events(date, start_time, end_time, time_zone, title, location, descripti
     print('Event created: %s' % (event.get('htmlLink')))
 
 
+def del_event(id):
+    service = login()
+    print('Deleting event with ID ' + id + '.')
+    try:
+        service.events().delete(calendarId='primary', eventId=id).execute()
+        return True
+    except:
+        return False
+
+
 def main():
     set_events("2019-09-01", "13:00:00", "14:00:00", "America/New_York", "This is a test calendar event.", "New York City", "Sample Title")
 

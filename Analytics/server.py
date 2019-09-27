@@ -25,5 +25,14 @@ def create_event():
     return "success"
 
 
+@app.route('/delete/<eid>', methods=['DELETE'])
+def delete_event(eid):
+    if feign_calendar.del_event(eid):
+        return "Success"
+    else:
+        return "Incorrect ID"
+
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    #app.run(host="0.0.0.0", port=5000)
+    app.run(port=5000)
