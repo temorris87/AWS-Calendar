@@ -1,30 +1,14 @@
-import ViewScreenPage from './Components/ViewPage'
+import ViewPageScreen from './Components/ViewPage'
+import LandingPageScreen from './Components/LandingPage'
+import CreatePageScreen from './Components/CreatePage'
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 
 const AppNavigator = createStackNavigator({
-  View: ViewScreenPage
+  View: ViewPageScreen,
+  Landing: LandingPageScreen,
+  Create: CreatePageScreen
 });
 
 export default createAppContainer(AppNavigator);
-
-
-// export default createSwitchNavigator({ 
-//   ViewScreen: ViewScreenPage
-// });
-// const AuthStack = createStackNavigator({ 
-//   LogIn: LogInScreen, 
-//   SignUp: SignUpScreen
-// });
-
-// createAppContainer(createSwitchNavigator(
-//   {
-//     LogIn: LogInScreen,
-//     App: AppStack,
-//     Auth: AuthStack,
-//   },
-//   {
-//     initialRouteName: 'ViewScreen',
-//   }
-// ));
