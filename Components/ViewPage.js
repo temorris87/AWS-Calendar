@@ -10,6 +10,7 @@ export default class ViewScreenPage extends Component {
       EventId: '',
       EventDate: '',
       EventTime: '',
+      EventLocation:'',
       description: ''
     };
 
@@ -22,6 +23,7 @@ export default class ViewScreenPage extends Component {
         const EventDate = this.props.navigation.getParam('date', 'No Date found')
         const EventTime = this.props.navigation.getParam('time', 'No Time found')
         const EventTitle = this.props.navigation.getParam('title', 'No title found')
+        const EventLocation = this.props.navigation.getParam('location', 'No location found')
         const description = this.props.navigation.getParam('description', 'No description found')
         
         this.setState({
@@ -29,6 +31,7 @@ export default class ViewScreenPage extends Component {
           EventDate: EventDate,
           EventTime: EventTime,
           title: EventTitle,
+          EventLocation: EventLocation,
           description
         })    
       } catch (error) {
@@ -68,6 +71,13 @@ export default class ViewScreenPage extends Component {
                 value={this.state.EventDate}
                 />
             </View>
+            <View  style={styles.entryDateContainer}>
+                <Text style={styles.entryDate}>Time :</Text>
+                <TextInput
+                style={styles.inputField}
+                value={this.state.EventTime}
+                />
+            </View>
             <View  style={styles.entryDescriptionContainer}>
                 <Text style={styles.entryDescription}>Description :</Text>
                 <TextInput
@@ -75,7 +85,13 @@ export default class ViewScreenPage extends Component {
                 value={this.state.description}
                 />
             </View>
-
+            <View  style={styles.entryDescriptionContainer}>
+                <Text style={styles.entryDescription}>Location :</Text>
+                <TextInput
+                style={styles.inputField}
+                value={this.state.EventLocation}
+                />
+            </View>
         </View>
         <View  style={styles.buttonsContainer}>
                 <View  style={styles.buttonContainer}>

@@ -39,6 +39,7 @@ export default class LandingPage extends Component {
                         date={entry.start.dateTime}
                         title={entry.summary}
                         description={entry.description}
+                        location={entry.location}
                         getPayload={this.getPayload}
                       />
                   )

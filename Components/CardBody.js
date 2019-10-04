@@ -21,7 +21,18 @@ class CardBody extends React.Component {
         const cardDate = entryDate.toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"});
         const cardTime = entryDate.toLocaleTimeString("en-US", {hour: "numeric", minute: "numeric"});
     return (
-      <Card >
+      <Card onPress={() => {
+          this.props.navigation.navigate('View',
+          {
+              id: this.props.id,
+              date: cardDate, 
+              time: cardTime,
+              title: this.props.title,
+              description: this.props.description,
+              location: this.props.location
+          }
+          )
+        }}>
         <Card.Content>
           <View style={styles.header}>
             <Title>{cardDate}</Title>
@@ -31,16 +42,6 @@ class CardBody extends React.Component {
         </Card.Content>
         <Card.Actions>
             {/* {console.log(this.props.id)} */}
-          <Button onPress={() => {
-              this.props.navigation.navigate('View', 
-                {
-                    id: this.props.id,
-                    date: cardDate, 
-                    time: cardTime,
-                    title: this.props.title,
-                    description: this.props.description
-                })
-                }}>View</Button>
           <Button onPress={() => {this.handleDelete()}}>Delete</Button>
         </Card.Actions>
       </Card>
