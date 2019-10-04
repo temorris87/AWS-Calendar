@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {ScrollView, Text, StyleSheet} from 'react-native';
-import {Card, Button, Title, Paragraph} from 'react-native-paper';
+import {Button} from 'react-native-paper';
 import axios from 'axios';
 import CardBody from './CardBody';
 
@@ -12,14 +12,19 @@ export default class LandingPage extends Component {
     this.state = {
       entries: []
     }
+
+    this.getPayload = this.getPayload.bind(this)
   }
 
-  async componentDidMount() {
+  async getPayload() {
     const res = await axios.get(`http://wosalexacalendar-env-1.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)        
     this.setState({
         entries: res.data
     })
-    
+  }
+
+  async componentDidMount() {
+    this.getPayload();
   }
 
   render() {
@@ -30,7 +35,11 @@ export default class LandingPage extends Component {
                   return (
                       <CardBody
                         key={index}
-                        title={entry.description}
+                        id={entry.id}
+                        date={entry.start.dateTime}
+                        title={entry.summary}
+                        description={entry.description}
+                        getPayload={this.getPayload}
                       />
                   )
               })}

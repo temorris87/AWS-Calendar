@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, DatePickerIOS , Button } from 'react-native';
-import axios from 'axios';
 
 
 export default class ViewScreenPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-    //   chosenDate: new Date(),
-      result: 'placeholder',
-      title: 'title placeholder'
+      title: '',
+      EventId: '',
+      EventDate: '',
+      EventTime: '',
+      description: ''
     };
 
     this.setDate = this.setDate.bind(this);
@@ -17,12 +18,18 @@ export default class ViewScreenPage extends Component {
 
   async componentDidMount(){
       try {
-        const res = await axios.get(`http://wosalexacalendar-env-1.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)        
-        const response = res.data[1]
+        const EventId = this.props.navigation.getParam('id', 'No Id found')
+        const EventDate = this.props.navigation.getParam('date', 'No Date found')
+        const EventTime = this.props.navigation.getParam('time', 'No Time found')
+        const EventTitle = this.props.navigation.getParam('title', 'No title found')
+        const description = this.props.navigation.getParam('description', 'No description found')
+        
         this.setState({
-          result: response.description,
-          title: response.summary,
-          chosenDate: response.start.dateTime
+          EventId: EventId,
+          EventDate: EventDate,
+          EventTime: EventTime,
+          title: EventTitle,
+          description
         })    
       } catch (error) {
         console.log('There has been a problem with your fetch operation: ' + error.message);
@@ -51,21 +58,21 @@ export default class ViewScreenPage extends Component {
                 <Text style={styles.entryTitle}>Title :</Text>
                 <TextInput
                 style={styles.inputField}
-                defaultValue={this.state.title}
+                value={this.state.title}
                 />
             </View>
             <View  style={styles.entryDateContainer}>
                 <Text style={styles.entryDate}>Date :</Text>
                 <TextInput
                 style={styles.inputField}
-                // defaultValue={this.state.chosenDate}
+                value={this.state.EventDate}
                 />
             </View>
             <View  style={styles.entryDescriptionContainer}>
                 <Text style={styles.entryDescription}>Description :</Text>
                 <TextInput
                 style={styles.inputField}
-                defaultValue={this.state.result}
+                value={this.state.description}
                 />
             </View>
 
