@@ -7,7 +7,7 @@ export default class LandingPage extends Component {
         return (
             <ScrollView style={styles.container}>
                 <Text style={styles.title}>Welcome to WOS Calendar App</Text>
-                <Card style={{margin: '10px'}}>
+                <Card>
                   <Card.Content style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Title>September 13, 2019</Title>
                     <Title>3:00 PM</Title>
@@ -15,9 +15,12 @@ export default class LandingPage extends Component {
                   <Card.Content>
                     <Title>Making This App</Title>
                   </Card.Content>
-                  <Card.Actions><Button>Delete</Button></Card.Actions>
+                  <Card.Actions>
+                      <Button>Delete</Button>
+                      <Button onPress={() => {this.props.navigation.navigate('View')}}>View</Button>
+                  </Card.Actions>                
                 </Card>
-                <Card style={{margin: '10px'}}>
+                <Card>
                   <Card.Content style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Title>September 13, 2019</Title>
                     <Title>3:00 PM</Title>
@@ -25,9 +28,12 @@ export default class LandingPage extends Component {
                   <Card.Content>
                     <Title>Making This App</Title>
                   </Card.Content>
-                  <Card.Actions><Button>Delete</Button></Card.Actions>
+                  <Card.Actions>
+                      <Button>Delete</Button>
+                      <Button onPress={() => {this.props.navigation.navigate('View')}}>View</Button>
+                  </Card.Actions>
                 </Card>
-                <Card style={{margin: '10px'}}>
+                <Card>
                   <Card.Content style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Title>September 13, 2019</Title>
                     <Title>3:00 PM</Title>
@@ -35,9 +41,12 @@ export default class LandingPage extends Component {
                   <Card.Content>
                     <Title>Making This App</Title>
                   </Card.Content>
-                  <Card.Actions><Button>Delete</Button></Card.Actions>
+                  <Card.Actions>
+                      <Button>Delete</Button>
+                      <Button onPress={() => {this.props.navigation.navigate('View')}}>View</Button>
+                </Card.Actions>                
                 </Card>
-                <Card style={{margin: '10px'}}>
+                <Card>
                   <Card.Content style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Title>September 13, 2019</Title>
                     <Title>3:00 PM</Title>
@@ -45,9 +54,12 @@ export default class LandingPage extends Component {
                   <Card.Content>
                     <Title>Making This App</Title>
                   </Card.Content>
-                  <Card.Actions><Button>Delete</Button></Card.Actions>
+                  <Card.Actions>
+                      <Button>Delete</Button>
+                      <Button onPress={() => {this.props.navigation.navigate('View')}}>View</Button>
+                </Card.Actions>                
                 </Card>
-                <Card style={{margin: '10px'}}>
+                <Card>
                   <Card.Content style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                     <Title>September 13, 2019</Title>
                     <Title>3:00 PM</Title>
@@ -55,7 +67,10 @@ export default class LandingPage extends Component {
                   <Card.Content>
                     <Title>Making This App</Title>
                   </Card.Content>
-                  <Card.Actions><Button>Delete</Button></Card.Actions>
+                  <Card.Actions>
+                      <Button>Delete</Button>
+                      <Button onPress={() => {this.props.navigation.navigate('View')}}>View</Button>
+                </Card.Actions>
                 </Card>
             </ScrollView>
         )
@@ -65,7 +80,6 @@ export default class LandingPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
     backgroundColor: '#CCCCCC',
     padding: 8
   },

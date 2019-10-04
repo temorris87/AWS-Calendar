@@ -7,7 +7,7 @@ export default class ViewScreenPage extends Component {
   constructor(props){
     super(props);
     this.state = {
-      chosenDate: new Date(),
+    //   chosenDate: new Date(),
       result: 'placeholder',
       title: 'title placeholder'
     };
@@ -16,14 +16,23 @@ export default class ViewScreenPage extends Component {
   };
 
   async componentDidMount(){
-    const res = await axios.get(`http://wosalexacalendar-env.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)
-    const response = res.data[1]
+      try {
+        const res = await axios.get(`http://wosalexacalendar-env-1.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)
+        // console.log(res);
+        
+        const response = res.data[1]
+    
+        this.setState({
+          result: response.description,
+          title: response.summary,
+          chosenDate: response.start.dateTime
+        })    
+      } catch (error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+        // ADD THIS THROW error
+         throw error;
+      }
 
-    this.setState({
-      result: response.description,
-      title: response.summary,
-      chosenDate: response.start.dateTime
-    })    
   }
 
   setDate(newDate) {
@@ -52,7 +61,7 @@ export default class ViewScreenPage extends Component {
                 <Text style={styles.entryDate}>Date :</Text>
                 <TextInput
                 style={styles.inputField}
-                defaultValue={this.state.chosenDate}
+                // defaultValue={this.state.chosenDate}
                 />
             </View>
             <View  style={styles.entryDescriptionContainer}>
@@ -68,7 +77,7 @@ export default class ViewScreenPage extends Component {
                 <View  style={styles.buttonContainer}>
                     <Button
                     style={styles.button}
-                    onPress={()=>{alert("Go Back! To Landing Page")}}
+                    onPress={()=>{this.props.navigation.navigate('Landing')}}
                     title="Back"
                     color="#4169e1"
                     containerStyle={{padding:10, margin:10, height:45, width: 150, overflow:'hidden', borderRadius:4, backgroundColor: 'white'}}
@@ -77,7 +86,7 @@ export default class ViewScreenPage extends Component {
                 <View  style={styles.buttonContainer}>
                     <Button
                     style={styles.button}
-                    onPress={()=>{alert("Go to Edit page!")}}
+                    onPress={()=>{this.props.navigation.navigate('Edit')}}
                     title="Edit"
                     color="red"
                     fontSize={24}
