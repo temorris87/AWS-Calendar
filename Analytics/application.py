@@ -12,6 +12,13 @@ def get_events():
     return jsonify(events)
 
 
+@application.route('/day/<day_str>', methods=['GET'])
+def get_daily_events(day_str):
+    print("Made it, code works")
+    events = feign_calendar.get_daily_events(day_str)
+    return jsonify(events)
+
+
 @application.route('/create', methods=['POST'])
 def create_event():
     date = request.args.get('date')
@@ -25,7 +32,7 @@ def create_event():
     return "success"
 
 
-@app.route('/delete/<eid>', methods=['DELETE'])
+@application.route('/delete/<eid>', methods=['DELETE'])
 def delete_event(eid):
     if feign_calendar.del_event(eid):
         return "Success"

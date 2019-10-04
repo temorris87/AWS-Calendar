@@ -41,12 +41,30 @@ def get_events(num_events):
     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
     print(f'Getting the upcoming {num_events} events')
-    events_result = service.events().list(calendarId='primary', timeMin=now,
-                                        maxResults=num_events, singleEvents=True,
-                                        orderBy='startTime').execute()
+    events_result = service.events().list(calendarId='primary',
+                                          timeMin=now,
+                                          maxResults=num_events,
+                                          singleEvents=True,
+                                          orderBy='startTime').execute()
     print('Events obtained from Google, returning.')
     return events_result.get('items', [])
 
+
+def get_daily_events(date_str):
+    service = login()
+    # Call the Calendar API
+    now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
+    print(f"Getting today's events")
+
+    time_min = day_start(date_str).isoformat() + 'Z'
+    time_max = day_end(date_str).isoformat() + 'Z'
+    events_result = service.events().list(calendarId='primary',
+                                          timeMin=time_min,
+                                          timeMax=time_max,
+                                          singleEvents=True,
+                                          orderBy='startTime').execute()
+    print('Events obtained from Google, returning.')
+    return events_result.get('items', [])
 
 def build_date_time(date, time):
     return f'{date}T{time}'
@@ -97,9 +115,30 @@ def del_event(id):
         return False
 
 
+def create_date(date_str, time_str):
+    date_data = date_str.split('-')
+    time_data = time_str.split(':')
+    year = int(date_data[0])
+    month = int(date_data[1])
+    day = int(date_data[2])
+    hour = int(time_data[0])
+    minute = int(time_data[1])
+    second = int(time_data[2])
+    return datetime.datetime(year, month, day, hour=hour, minute=minute, second=second)
+
+
+def day_start(date_str):
+    return create_date(date_str, "0:00:00")
+
+
+def day_end(date_str):
+    return create_date(date_str, "23:59:59")
+
+
 def main():
     set_events("2019-09-01", "13:00:00", "14:00:00", "America/New_York", "This is a test calendar event.", "New York City", "Sample Title")
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    print(get_daily_events("2019-10-15"))
