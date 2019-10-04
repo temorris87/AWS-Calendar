@@ -2,7 +2,7 @@ import ViewPageScreen from './Components/ViewPage'
 import LandingPageScreen from './Components/LandingPage'
 import CreatePageScreen from './Components/CreatePage'
 import EditPageScreen from './Components/CreatePage'
-import { createAppContainer } from 'react-navigation';
+import { createAppContainer, StackNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 

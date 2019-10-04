@@ -17,11 +17,8 @@ export default class ViewScreenPage extends Component {
 
   async componentDidMount(){
       try {
-        const res = await axios.get(`http://wosalexacalendar-env-1.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)
-        // console.log(res);
-        
+        const res = await axios.get(`http://wosalexacalendar-env-1.f9c7xd9apm.us-east-2.elasticbeanstalk.com/`)        
         const response = res.data[1]
-    
         this.setState({
           result: response.description,
           title: response.summary,
