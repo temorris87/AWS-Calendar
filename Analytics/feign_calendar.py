@@ -105,6 +105,41 @@ def set_events(date, start_time, end_time, time_zone, title, location, descripti
     print('Event created: %s' % (event.get('htmlLink')))
 
 
+def update_events(eid, date, start_time, end_time, time_zone, title, location, description):
+    service = login()
+    event = {
+        'summary': f'{title}',
+        'location': f'{location}',
+        'description': f'{description}',
+        'start': {
+            'dateTime': build_date_time(date, start_time),
+            'timeZone': f'{time_zone}',
+        },
+        'end': {
+            'dateTime': build_date_time(date, end_time),
+            'timeZone': f'{time_zone}',
+        },
+        'recurrence': [
+            # 'RRULE:FREQ=DAILY;COUNT=2'
+        ],
+        'attendees': [
+            # {'email': 'lpage@example.com'},
+            # {'email': 'sbrin@example.com'},
+        ],
+        'reminders': {
+            # 'useDefault': False,
+            # 'overrides': [
+            #     {'method': 'email', 'minutes': 24 * 60},
+            #     {'method': 'popup', 'minutes': 10},
+            # ],
+        },
+    }
+
+    print('Sending event to Google.')
+    event = service.events().update(eventId=eid, calendarId='primary', body=event).execute()
+    print('Event created: %s' % (event.get('htmlLink')))
+
+
 def del_event(id):
     service = login()
     print('Deleting event with ID ' + id + '.')
